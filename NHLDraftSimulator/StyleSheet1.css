@@ -1,0 +1,26 @@
+﻿body { 
+    background-color: silver;
+	color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+
+.pickcontainer{
+	
+}
+
+.header{
+
+	text-align: center;
+}
+
+.maincontainer{
+	
+  text-align: center;
+    top: 0px;
+    left: 0px;
+    height: 798px;
+}
+
+
