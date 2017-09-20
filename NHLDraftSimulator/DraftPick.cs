@@ -9,7 +9,7 @@ namespace NHLDraftSimulator
     {
         public int OverallPickNumber { get; set; }
 
-        public string Round { get; set; }
+        public int Round { get; set; }
 
         public int PickInRound { get; set; }
 
@@ -17,9 +17,11 @@ namespace NHLDraftSimulator
 
         public DraftPick PreviousPick { get; set; }
 
-        public string Team { get; set; }
+        public string TeamName { get; set; }
 
-        public Guid DraftID { get; set; }
+        public int TeamID { get; set; }
+
+        public Guid DraftPickID { get; set; }
 
     }
 }

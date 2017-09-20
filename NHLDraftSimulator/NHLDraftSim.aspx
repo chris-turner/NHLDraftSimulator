@@ -28,19 +28,34 @@
   
   <div class="row">
     <div class="col-12 col-sm-2 col-lg-2 left">
-      <div id="rd1p1">
-      Round 1, Pick #1 <br/>
-      TeamName
-      </div>
+        
+        
+      <asp:Label ID="pick1roundandpick" runat="server" Text="Pick1">
+      </asp:Label><br/>
+      <asp:Label ID="pick1team" runat="server" Text="Pick1">
+      </asp:Label><br/>
+      
       <hr/>
-      Round 1, Pick #2<br/>
-      TeamName
+      
+      <asp:Label ID="pick2roundandpick" runat="server" Text="Pick2">
+      </asp:Label><br/>
+      <asp:Label ID="pick2team" runat="server" Text="Pick2">
+      </asp:Label><br/>
+      
       <hr/>
-      Round 1, Pick #3 <br/>
-      TeamName
+      
+      <asp:Label ID="pick3roundandpick" runat="server" Text="Pick3">
+      </asp:Label><br/>
+      <asp:Label ID="pick3team" runat="server" Text="Pick3">
+      </asp:Label><br/>
+      
       <hr/>
-      Round 1, Pick #4 <br/>
-      TeamName
+      
+      <asp:Label ID="pick4roundandpick" runat="server" Text="Pick4">
+      </asp:Label><br/>
+      <asp:Label ID="pick4team" runat="server" Text="Pick4">
+      </asp:Label><br/>
+      
       <hr/>
     </div>
 

@@ -50,7 +50,7 @@ namespace NHLDraftSimulator
             cmd = new SqlCommand("insert into User_Team_Draft (TeamID, UserID, DraftID) values(" + teamID + ",'" + Session["UserID"] + "','" + Session["DraftID"] + "')", con);
             cmd.ExecuteReader();
             con.Close();
-
+            Session["DraftYear"] = Request.QueryString["draftYear"];
             Response.Redirect("~/NHLDraftSim.aspx");
 
         }
