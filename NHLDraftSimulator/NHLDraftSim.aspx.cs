@@ -51,10 +51,10 @@ namespace NHLDraftSimulator
 
                 }
             }
-                
+                Session["draftPicks"] = draftPicks;
 
             }
-            //getCurrentPick();
+            getCurrentPick((DraftPick[])Session["draftPicks"]);
 
 
 
@@ -65,21 +65,54 @@ namespace NHLDraftSimulator
             Panel1.Visible = true;
         }
 
-        public void getCurrentPick(List<DraftPick> draftPicks, Guid DraftID)
+        public void getCurrentPick(DraftPick[] draftPicks)
         {
             //write SQL query to find current pick
             //load 4 picks into side bar
-            pick1roundandpick.Text = "Round " + draftPicks[0].Round + ", Pick #" + draftPicks[0].PickInRound;
-            pick1team.Text = draftPicks[0].TeamName;
+            Guid currentPickID = Guid.Empty;
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
+            con.Open();
+            SqlCommand cmd = 
+                new SqlCommand("select top 1 DP.DraftPickID, DP.PickNum from DraftPick as DP where DraftPickID not in (Select DraftPickID from Player_Draft_Pick where DraftID = '" + Session["DraftID"] + "') order by PickNum", con);
 
-            pick2roundandpick.Text = "Round " + draftPicks[1].Round + ", Pick #" + draftPicks[1].PickInRound;
-            pick2team.Text = draftPicks[1].TeamName;
+            using (var rdr = cmd.ExecuteReader())
+            {
+                    while(rdr.Read())
+                    {
+                        currentPickID = rdr.GetGuid(0);
+                    }
+            }
+            con.Close();
 
-            pick3roundandpick.Text = "Round " + draftPicks[2].Round + ", Pick #" + draftPicks[2].PickInRound;
-            pick3team.Text = draftPicks[2].TeamName;
+            DraftPick currentPick = null;
+            foreach (DraftPick pick in draftPicks)
+            {
+                if (pick.DraftPickID.Equals(currentPickID))
+                {
+                    currentPick = pick;
+                }
+            }
 
-            pick4roundandpick.Text = "Round " + draftPicks[3].Round + ", Pick #" + draftPicks[3].PickInRound;
-            pick4team.Text = draftPicks[3].TeamName;
+
+            DraftPick pick2 = currentPick.NextPick;
+            DraftPick pick3 = pick2.NextPick;
+            DraftPick pick4 = pick3.NextPick;
+
+            if (currentPick != null)
+            {
+                pick1roundandpick.Text = "Round " + currentPick.Round + ", Pick #" + currentPick.PickInRound;
+                pick1team.Text = currentPick.TeamName;
+
+                pick2roundandpick.Text = "Round " + pick2.Round + ", Pick #" + pick2.PickInRound;
+                pick2team.Text = pick2.TeamName;
+
+                pick3roundandpick.Text = "Round " + pick3.Round + ", Pick #" + pick3.PickInRound;
+                pick3team.Text = pick3.TeamName;
+
+                pick4roundandpick.Text = "Round " + pick4.Round + ", Pick #" + pick4.PickInRound;
+                pick4team.Text = pick4.TeamName;
+            }
+            
 
 
         }
