@@ -27,9 +27,7 @@
   </div>
   
   <div class="row">
-    <div class="col-12 col-sm-2 col-lg-2 left">
-     
-    </div>
+  
 
 
     <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
@@ -45,7 +43,9 @@
 
     </div>
 
+       <div class="col-12 col-sm-2 col-lg-2 left">
      
+    </div>
     
 
 </div>  

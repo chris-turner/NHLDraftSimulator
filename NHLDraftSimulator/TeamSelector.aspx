@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeamSelector.aspx.cs" Inherits="NHLDraftSimulator.TeamSelector" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeamSelector.aspx.cs" Inherits="NHLDraftSimulator.TeamSelector" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -26,44 +26,29 @@
     <h1>NHL Draft Simulator</h1>
   </div>
   
-  <div class="row">
-    <div class="col-12 col-sm-2 col-lg-2 left">
-      
-    </div>
-
+ 
+                <div class="row">
 
     <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
         Choose your team
       <br/>
-        <asp:GridView ID="TeamImageGridView" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" ShowHeader="false" GridLines="None" >
 
-            <Columns>
-                    <asp:BoundField DataField="TeamName"  SortExpression="TeamName" />
-                    <asp:TemplateField >
-                      <ItemTemplate >
 
-                        <asp:Image ID="Image1" runat="server" ImageUrl= '<%# "Images\\"+Eval("ImageFileName")+".gif" %>' height="120px" Width="150px" />
+        <asp:ListView ID="TeamListView" runat="server" HorizontalAlign="center">
+
+            <ItemTemplate >
+
+                        <asp:ImageButton ID="teamImage" runat="server" ImageUrl= '<%# "Images\\"+Eval("ImageFileName")+".gif" %>' 
+                            OnClick="teamImage_onclick" CommandArgument='<%# Eval("TeamID") %>' height="75px" Width="100px" />
 
                       </ItemTemplate>
-                        
-                        
-                    </asp:TemplateField>
-                <asp:TemplateField >
-                <ItemTemplate >
-                        <asp:LinkButton id="teambutton" class="btn btn-primary btn-lg" runat="server" OnClick="btnChoose_onclick" CommandArgument= '<%# Eval("TeamID") %>'>Select</asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-
-        </asp:GridView>
-        
-        <br/>
-        <asp:Button runat="server" Text="Draft" />
-        <br/>
-
+        </asp:ListView>
     </div>
 
-     
+
+    <div class="col-12 col-sm-2 col-lg-2 left">
+      
+    </div>
     
 
 </div>  

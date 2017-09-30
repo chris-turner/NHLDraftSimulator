@@ -13,44 +13,41 @@ namespace NHLDraftSimulator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-         
-            if (Session["DraftID"] == null)
-            {
-                Session["DraftID"] = Guid.NewGuid();
-            }
-
-           String draftYear = Request.QueryString["draftYear"]; 
+           String draftYear = Request.QueryString["dy"]; 
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
-            SqlCommand cmd = new SqlCommand("select TeamID, TeamName, ImageFileName from Team where BeginYear <="+ draftYear+
-                " and (EndYear >="+ draftYear+"or EndYear is null)", con);
-            TeamImageGridView.DataSource = cmd.ExecuteReader();
-            TeamImageGridView.DataBind();
+            SqlCommand cmd = new SqlCommand("select TeamID, TeamName, ImageFileName from Team where BeginYear <=" + draftYear +
+                " and (EndYear >=" + draftYear.Trim() +"or EndYear is null)", con);
+            TeamListView.DataSource = cmd.ExecuteReader();
+            TeamListView.DataBind();
             con.Close();
         }
 
-        protected void btnChoose_onclick(object sender, EventArgs e)
+        protected void teamImage_onclick(object sender, EventArgs e)
         {
-            LinkButton btn = (LinkButton)(sender);
+            Session["DraftID"] = Guid.NewGuid();
+            ImageButton btn = (ImageButton)(sender);
             string teamID = btn.CommandArgument;
-            String draftYear = Request.QueryString["draftYear"];
-            string draftName = "TempName"; //will need to be changed at some point to allow user to change name
+            string draftYear = Request.QueryString["dy"];
+            string draftName = Request.QueryString["dn"];
+
+            if (draftName.Trim() == "" || draftName == null)
+            {
+                draftName = "MyDraft";
+            }
+
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
-            SqlCommand cmd = new SqlCommand("insert into [User] (UserID) values ('" + Session["UserID"] + "')", con);
-            cmd.ExecuteReader();
-            con.Close();
-            con.Open();
-            cmd = new SqlCommand("insert into Draft (DraftID, UserID, DraftName,DraftYear) values ('" + Session["DraftID"] +"','" + Session["UserID"] + "','" + draftName + "' ,'" + draftYear+ "')", con);
+            SqlCommand  cmd = new SqlCommand("insert into Draft (DraftID, UserID, DraftName,DraftYear) values ('" + Session["DraftID"] +"','" + Session["UserID"] + "','" + draftName + "' ,'" + draftYear+ "')", con);
             cmd.ExecuteReader();
             con.Close();
             con.Open();
             cmd = new SqlCommand("insert into User_Team_Draft (TeamID, UserID, DraftID) values(" + teamID + ",'" + Session["UserID"] + "','" + Session["DraftID"] + "')", con);
             cmd.ExecuteReader();
             con.Close();
-            Session["DraftYear"] = Request.QueryString["draftYear"];
+            Session["DraftYear"] = Request.QueryString["dy"];
             Response.Redirect("~/NHLDraftSim.aspx");
 
         }

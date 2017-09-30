@@ -27,19 +27,69 @@
   </div>
   
   <div class="row">
-    <div class="col-12 col-sm-2 col-lg-2 left">
+    
+
+
+    <div class="col-12 col-sm-8 col-lg-8 main maincontainer" >
+        <asp:Label ID="teamonclock" runat="server" Text="">TeamName are on the clock.</asp:Label>
+      <br/>
+        <asp:Image ID="TeamLogo" runat="server" ImageUrl="/Images/nhllogo.jpg" />
+        <br/>
+
+        <br/>
+        <asp:Label ID="currentPickSelection" runat="server" Visible="false"></asp:Label>
+      <br/>
+        <asp:Button ID="btnDraft" runat="server" Text="Draft" OnClick="btnDraft_Click" />
+        <br/>
+         <asp:Panel ID="availablePlayers" class="center-block" runat="server" Height="464px" Visible="false">
+              <asp:GridView ID="PlayerSelectionGridView" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" ShowHeader="false" GridLines="none" >
+
+            <Columns>
+                    <asp:BoundField DataField="Ranking"  SortExpression="Ranking" />
+                 </Columns>
+                  <Columns>
+                <asp:BoundField DataField="Position"  SortExpression="Position" />
+                       </Columns>
+                   <Columns>
+                <asp:BoundField DataField="PlayerFName"  SortExpression="PlayerFName" />
+                       </Columns>
+                  <Columns>
+                <asp:BoundField DataField="PlayerLName"  SortExpression="PlayerLName" />
+                       </Columns>
+                  <Columns>
+                <asp:BoundField DataField="Nationality"  SortExpression="Nationality" />
+                       </Columns>
+                  <Columns>
+                <asp:TemplateField >
+                <ItemTemplate >
+                        <asp:LinkButton id="choosePlayer" class="btn btn-primary btn-lg" runat="server" OnClick="choosePlayer_Click" CommandArgument= '<%# Eval("PlayerID") %>'>Select</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+               </Columns>
+
+        </asp:GridView>
+
+           </asp:Panel>
+
+    </div>
+      <div class="col-12 col-sm-2 col-lg-2 pull-right">
         
         
       <asp:Label ID="pick1roundandpick" runat="server" Text="Pick1">
       </asp:Label><br/>
       <asp:Label ID="pick1team" runat="server" Text="Pick1">
       </asp:Label><br/>
+        <asp:Label ID="pick1playerName" runat="server" Text="">
+      </asp:Label><br/>
+
       
       <hr/>
       
       <asp:Label ID="pick2roundandpick" runat="server" Text="Pick2">
       </asp:Label><br/>
       <asp:Label ID="pick2team" runat="server" Text="Pick2">
+      </asp:Label><br/>
+        <asp:Label ID="pick2playerName" runat="server" Text="">
       </asp:Label><br/>
       
       <hr/>
@@ -48,6 +98,9 @@
       </asp:Label><br/>
       <asp:Label ID="pick3team" runat="server" Text="Pick3">
       </asp:Label><br/>
+         <asp:Label ID="pick3playerName" runat="server" Text="">
+      </asp:Label><br/>
+
       
       <hr/>
       
@@ -55,27 +108,14 @@
       </asp:Label><br/>
       <asp:Label ID="pick4team" runat="server" Text="Pick4">
       </asp:Label><br/>
+        <asp:Label ID="pick4playerName" runat="server" Text="">
+      </asp:Label><br/>
+        <hr/>
+        <asp:LinkButton id="viewFullResults" class="btn btn-primary btn-md" runat="server" OnClick="viewFullResults_Click">View Full Draft Results</asp:LinkButton>
+        <hr/>
+    
       
-      <hr/>
     </div>
-
-
-    <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
-        TeamName are on the clock.
-      <br/>
-        
-        <img src="Images/nhllogo.jpg" />
-        <br/>
-        <br/>
-        <asp:Button runat="server" Text="Draft" OnClick="Unnamed1_Click" />
-        <br/>
-         <asp:Panel ID="Panel1" runat="server" Height="464px" Visible="false">
-
-
-            test</asp:Panel>
-
-    </div>
-
      
     
 

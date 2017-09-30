@@ -24,7 +24,7 @@ namespace NHLDraftSimulator
 
         protected void btnContinue_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/TeamSelector.aspx?draftYear="+ ddlYears.SelectedValue);
+            Response.Redirect("~/TeamSelector.aspx?dy="+ ddlYears.SelectedValue + "&dn=" + draftNameTxtBox.Text.Trim());
         }
     }
 }

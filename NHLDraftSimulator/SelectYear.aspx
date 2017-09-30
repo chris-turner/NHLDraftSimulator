@@ -25,12 +25,7 @@
   <div class="header">
     <h1>NHL Draft Simulator</h1>
   </div>
-  
-  <div class="row">
-    <div class="col-12 col-sm-2 col-lg-2 left">
-     
-    </div>
-
+           <div class="row">
 
     <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
         Select A Draft Year
@@ -39,16 +34,21 @@
         <img src="Images/nhllogo.jpg" />
          <br/>
          <br/>
-        <asp:DropDownList ID="ddlYears" runat="server" ></asp:DropDownList>
+        <asp:DropDownList ID="ddlYears" runat="server" Width ="140px"></asp:DropDownList>
         <br/>
         <br/>
+        Name Your Draft
+         <br/>
+      <asp:TextBox ID="draftNameTxtBox" runat="server" MaxLength="12" Width ="140px"></asp:TextBox>
+        <br/>
+         <br/>
+         <br/>
         <asp:Button runat="server" Text="Continue" ID="btnContinue" OnClick="btnContinue_Click"  />
-        <br/>
-
     </div>
-
+          
+    <div class="col-12 col-sm-2 col-lg-2 left">
      
-    
+    </div>
 
 </div>  
       </form>
