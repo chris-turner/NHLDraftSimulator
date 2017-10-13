@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NHLDraftSim.aspx.cs" Inherits="NHLDraftSimulator.NHLDraftSim" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NHLDraftSim.aspx.cs" Inherits="NHLDraftSimulator.NHLDraftSim"  %>
 
 <!DOCTYPE html>
 
@@ -21,17 +21,23 @@
   <body>
     
       <form id="form1" runat="server">
-    
-  <div class="header">
+	  
+	  
+	  
+  
+  
+  <div class="row container-fluid">
+
+      <div class="header">
     <h1>NHL Draft Simulator</h1>
   </div>
-  
-  <div class="row">
-    
+      <div class="col-2 col-sm-2 col-lg-2 ">
 
+      </div>
 
-    <div class="col-12 col-sm-8 col-lg-8 main maincontainer" >
-        <asp:Label ID="teamonclock" runat="server" Text="">TeamName are on the clock.</asp:Label>
+   <div class="col-8 col-sm-8 col-lg-8 maincontainer" >
+       
+     <asp:Label ID="teamonclock" runat="server" Text="">TeamName are on the clock.</asp:Label>
       <br/>
         <asp:Image ID="TeamLogo" runat="server" ImageUrl="/Images/nhllogo.jpg" />
         <br/>
@@ -41,7 +47,7 @@
       <br/>
         <asp:Button ID="btnDraft" runat="server" Text="Draft" OnClick="btnDraft_Click" />
         <br/>
-         <asp:Panel ID="availablePlayers" class="center-block" runat="server" Height="464px" Visible="false">
+         <asp:Panel ID="availablePlayers"  runat="server" Height="464px" Visible="false">
               <asp:GridView ID="PlayerSelectionGridView" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" ShowHeader="false" GridLines="none" >
 
             <Columns>
@@ -70,9 +76,10 @@
         </asp:GridView>
 
            </asp:Panel>
-
-    </div>
-      <div class="col-12 col-sm-2 col-lg-2 pull-right">
+   
+   </div>
+   
+    <div class="col-2 col-sm-2 col-lg-2 right">
         
         
       <asp:Label ID="pick1roundandpick" runat="server" Text="Pick1">
@@ -116,10 +123,11 @@
     
       
     </div>
-     
-    
+  
+  
+  </div>
 
-</div>  
+	  
       </form>
 </body>
 </html>

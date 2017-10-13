@@ -26,8 +26,10 @@
     <h1>NHL Draft Simulator</h1>
   </div>
            <div class="row">
+                <div class="col-2 col-sm-2 col-lg-2 ">
 
-    <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
+      </div>
+    <div class="col-8 col-sm-8 col-lg-8 main maincontainer">
         Select A Draft Year
       <br/>
         
@@ -46,7 +48,7 @@
         <asp:Button runat="server" Text="Continue" ID="btnContinue" OnClick="btnContinue_Click"  />
     </div>
           
-    <div class="col-12 col-sm-2 col-lg-2 left">
+    <div class="col-2 col-sm-2 col-lg-2 right">
      
     </div>
 

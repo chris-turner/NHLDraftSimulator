@@ -28,9 +28,11 @@
   
   <div class="row">
   
+       <div class="col-2 col-sm-2 col-lg-2 ">
 
+      </div>
 
-    <div class="col-12 col-sm-8 col-lg-8 main maincontainer">
+    <div class="col-8 col-sm-8 col-lg-8 main maincontainer">
         Welcome, choose an option below.
       <br/>
          <br/>
@@ -43,7 +45,7 @@
 
     </div>
 
-       <div class="col-12 col-sm-2 col-lg-2 left">
+       <div class="col-2 col-sm-2 col-lg-2 right">
      
     </div>
     

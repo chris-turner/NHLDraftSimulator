@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
+using System.Timers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -35,7 +36,9 @@ namespace NHLDraftSimulator
             if (!currentPick.IsUserTeam)
             {
                 btnDraft.Visible = false;
-                autoPick(currentPick);
+                System.Timers.Timer t = new System.Timers.Timer(100);
+                t.Start();
+                ;
             }
             else
             {
