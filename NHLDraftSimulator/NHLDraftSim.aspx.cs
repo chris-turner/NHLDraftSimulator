@@ -36,9 +36,9 @@ namespace NHLDraftSimulator
             if (!currentPick.IsUserTeam)
             {
                 btnDraft.Visible = false;
-                System.Timers.Timer t = new System.Timers.Timer(100);
-                t.Start();
-                ;
+                //System.Timers.Timer t = new System.Timers.Timer(100);
+                //t.Start();
+                
             }
             else
             {
@@ -227,7 +227,13 @@ namespace NHLDraftSimulator
             advancePick(currentPick);
         }
 
+        /*
+        method for when timer expires or user chooses a player
 
+        make pick
+        display pick for 3 seconds
+        advance pick (currentpick)
+    */
         
 
         protected void viewFullResults_Click(object sender, EventArgs e)
