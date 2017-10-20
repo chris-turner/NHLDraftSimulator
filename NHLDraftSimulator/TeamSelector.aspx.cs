@@ -18,7 +18,7 @@ namespace NHLDraftSimulator
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
             SqlCommand cmd = new SqlCommand("select TeamID, TeamName, ImageFileName from Team where BeginYear <=" + draftYear +
-                " and (EndYear >=" + draftYear.Trim() +"or EndYear is null)", con);
+                " and (EndYear >=" + draftYear.Trim() +"or EndYear is null) order by TeamName", con);
             TeamListView.DataSource = cmd.ExecuteReader();
             TeamListView.DataBind();
             con.Close();
@@ -40,7 +40,7 @@ namespace NHLDraftSimulator
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
-            SqlCommand  cmd = new SqlCommand("insert into Draft (DraftID, UserID, DraftName,DraftYear) values ('" + Session["DraftID"] +"','" + Session["UserID"] + "','" + draftName + "' ,'" + draftYear+ "')", con);
+            SqlCommand  cmd = new SqlCommand("insert into Draft (DraftID, UserID, DraftName,DraftYear, Created) values ('" + Session["DraftID"] +"','" + Session["UserID"] + "','" + draftName + "' ,'" + draftYear+ "', +GETDATE())", con);
             cmd.ExecuteReader();
             con.Close();
             con.Open();

@@ -21,13 +21,14 @@ namespace NHLDraftSimulator
                 Session["players"] = draft.loadPlayers(Session["DraftYear"].ToString().Trim());
                 Session["draftPicks"] = draft.loadPicks(Session["DraftYear"].ToString().Trim());
                 DraftPick currentPick = getCurrentPick((DraftPick[])Session["draftPicks"]);
+                Session["CurrentPick"] = currentPick;
                 checkIfUserPick(currentPick);
-                
+
 
             }
-          
 
-            
+
+
 
         }
 
@@ -36,12 +37,12 @@ namespace NHLDraftSimulator
             if (!currentPick.IsUserTeam)
             {
                 btnDraft.Visible = false;
-                //System.Timers.Timer t = new System.Timers.Timer(100);
-                //t.Start();
-                
+                Timer.Interval = 2000;
+
             }
             else
             {
+                Timer.Interval = 60000;
                 btnDraft.Visible = true;
             }
 
@@ -49,15 +50,15 @@ namespace NHLDraftSimulator
 
         protected void btnDraft_Click(object sender, EventArgs e)
         {
+            availablePlayers.ScrollBars = ScrollBars.Auto;
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
-            SqlCommand cmd = new SqlCommand("select PlayerID, P.PlayerFName, P.PlayerLName, P.Position, P.Nationality, P.Ranking"+
-                " from Player as P where P.DraftYear = (select Draft.DraftYear from Draft where Draft.DraftID = '"+Session["DraftID"]+"' ) and P.PlayerID not in"+
+            SqlCommand cmd = new SqlCommand("select PlayerID, P.PlayerFName + ' ' + P.PlayerLName as 'Name', P.Position, P.Nationality, P.Ranking" +
+                " from Player as P where P.DraftYear = (select Draft.DraftYear from Draft where Draft.DraftID = '" + Session["DraftID"] + "' ) and P.PlayerID not in" +
                 "(Select PlayerTakenID from Player_Draft_Pick where DraftID = '" + Session["DraftID"].ToString().Trim() + "' ) order by P.Ranking", con);
             PlayerSelectionGridView.DataSource = cmd.ExecuteReader();
             PlayerSelectionGridView.DataBind();
             con.Close();
-
             availablePlayers.Visible = true;
 
         }
@@ -95,13 +96,12 @@ namespace NHLDraftSimulator
                         pickName = player.PlayerFName + " " + player.PlayerLName;
                     }
                 }
-
+                btnDraft.Visible = false;
                 currentPickSelection.Visible = true;
                 currentPickSelection.Text = currentPick.TeamName + " select " + pickName;
                 currentPick.PlayerID = playerID;
                 currentPick.PlayerName = pickName;
-                //Thread.Sleep(5000);
-                advancePick(currentPick);
+                Session["CurrentPick"] = currentPick;
             }
 
         }
@@ -109,25 +109,25 @@ namespace NHLDraftSimulator
 
         public DraftPick getCurrentPick(DraftPick[] draftPicks)
         {
-            Guid currentPickID = Guid.Empty;
+            int currentPickID = 0;
             int UserTeamID = 0;
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
             con.Open();
-            SqlCommand cmd = 
-                new SqlCommand("select top 1 DP.DraftPickID, DP.PickNum from DraftPick as DP where DraftPickID not in (Select DraftPickID from Player_Draft_Pick where DraftID = '" 
+            SqlCommand cmd =
+                new SqlCommand("select top 1 DP.DraftPickID, DP.PickNum from DraftPick as DP where DraftPickID not in (Select DraftPickID from Player_Draft_Pick where DraftID = '"
                 + Session["DraftID"].ToString().Trim() + "') order by PickNum", con);
 
             using (var rdr = cmd.ExecuteReader())
             {
-                    while(rdr.Read())
-                    {
-                        currentPickID = rdr.GetGuid(0);
-                    }
+                while (rdr.Read())
+                {
+                    currentPickID = rdr.GetInt32(0);
+                }
             }
             con.Close();
             con.Open();
             cmd =
-                new SqlCommand("select TeamID, UserID, DraftID from User_Team_Draft where UserID = '"+Session["UserID"]+"' and DraftID = '"+
+                new SqlCommand("select TeamID, UserID, DraftID from User_Team_Draft where UserID = '" + Session["UserID"] + "' and DraftID = '" +
                 Session["DraftID"].ToString().Trim() + "'", con);
 
             using (var rdr = cmd.ExecuteReader())
@@ -156,31 +156,14 @@ namespace NHLDraftSimulator
                     pick.IsUserTeam = false;
                 }
             }
-            Session["CurrentPick"] = currentPick;
-            DraftPick pick2 = currentPick.NextPick;
-            DraftPick pick3 = pick2.NextPick;
-            DraftPick pick4 = pick3.NextPick;
-
             if (currentPick != null)
             {
-                TeamLogo.ImageUrl = "/Images/"+currentPick.ImageFileName+".gif";
+                TeamLogo.ImageUrl = "/Images/" + currentPick.ImageFileName + ".gif";
                 teamonclock.Text = currentPick.TeamName + " are on the clock.";
-
-                pick1roundandpick.Text = "Round " + currentPick.Round + ", Pick #" + currentPick.PickInRound;
-                pick1team.Text = currentPick.TeamName;
-
-                pick2roundandpick.Text = "Round " + pick2.Round + ", Pick #" + pick2.PickInRound;
-                pick2team.Text = pick2.TeamName;
-
-                pick3roundandpick.Text = "Round " + pick3.Round + ", Pick #" + pick3.PickInRound;
-                pick3team.Text = pick3.TeamName;
-
-                pick4roundandpick.Text = "Round " + pick4.Round + ", Pick #" + pick4.PickInRound;
-                pick4team.Text = pick4.TeamName;
-
-                
+                populateSidebar(currentPick);
             }
-            return currentPick;
+
+                return currentPick;
 
 
         }
@@ -188,10 +171,11 @@ namespace NHLDraftSimulator
         public void advancePick(DraftPick currentPick)
         {
             //figure out what to do with populating picks on sidebar
+            currentPickSelection.Text = "";
             currentPick = currentPick.NextPick;
             TeamLogo.ImageUrl = "/Images/" + currentPick.ImageFileName + ".gif";
             teamonclock.Text = currentPick.TeamName + " are on the clock.";
-            Session["currentPick"] = currentPick;
+            Session["CurrentPick"] = currentPick;
             checkIfUserPick(currentPick);
 
         }
@@ -199,7 +183,8 @@ namespace NHLDraftSimulator
 
         protected void choosePlayer_Click(object sender, EventArgs e)
         {
-            DraftPick currentPick = (DraftPick)Session["currentPick"];
+            availablePlayers.ScrollBars = ScrollBars.None;
+            DraftPick currentPick = (DraftPick)Session["CurrentPick"];
             LinkButton btn = (LinkButton)(sender);
             int playerID = Convert.ToInt32(btn.CommandArgument);
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
@@ -221,26 +206,158 @@ namespace NHLDraftSimulator
             currentPickSelection.Text = currentPick.TeamName + " select " + pickName;
             currentPick.PlayerID = playerID;
             currentPick.PlayerName = pickName;
-            //Thread.Sleep(5000);
             PlayerSelectionGridView.DataSource = null;
             PlayerSelectionGridView.DataBind();
-            advancePick(currentPick);
+            btnDraft.Visible = false;
+            Timer.Interval = 4500;
+
+
         }
-
-        /*
-        method for when timer expires or user chooses a player
-
-        make pick
-        display pick for 3 seconds
-        advance pick (currentpick)
-    */
         
 
         protected void viewFullResults_Click(object sender, EventArgs e)
         {
+            Timer.Enabled = false;
+            btnDraft.Visible = false;
+            btnResume.Visible = true;
+            Response.Write("<script>");
+            Response.Write("window.open('DraftResults.aspx','_blank')");
+            Response.Write("</script>");
+
+        }
+
+        protected void Timer_Tick(object sender, EventArgs e)
+        {
+            DraftPick currentPick = (DraftPick)Session["CurrentPick"];
+            
+            
+
+            if (currentPick.PlayerName == null || currentPick.NextPick != null)
+            {
+                populateSidebar(currentPick);
+                if (currentPick.PlayerName == null)
+                {
+                    autoPick(currentPick);
+                    Timer.Interval = 4500;
+
+                }
+                else
+                {
+                    advancePick(currentPick);
+                }
+            }
+            else
+            {
+                pick1playerName.Text = currentPick.PlayerName;
+                teamonclock.Text = "The draft has ended.";
+                Timer.Enabled = false;
+            }
+            
+        }
+        public void populateSidebar(DraftPick currentPick)
+        {
+            DraftPick pick2 = null;
+            DraftPick pick3 = null;
+            DraftPick pick4 = null;
+            if (currentPick.NextPick != null)
+            {
+                pick2 = currentPick.NextPick;
+                if (pick2.NextPick != null)
+                {
+                    pick3 = pick2.NextPick;
+
+                    if (pick3.NextPick != null)
+                    {
+                        pick4 = pick3.NextPick;
+                    }
+
+                    else
+                    {
+                        pick4roundandpick.Text = "";
+                        pick4team.Text = "";
+                        pick4playerName.Text = "";
+                    }
+                }
+                else
+                {
+                    pick3roundandpick.Text = "";
+                    pick3team.Text = "";
+                    pick3playerName.Text = "";
+                }
+
+            }
+            else
+            {
+                pick2roundandpick.Text = "";
+                pick2team.Text = "";
+                pick2playerName.Text = "";
+           }
+
+
+            if (currentPick != null)
+            {
+                pick1roundandpick.Text = "Round " + currentPick.Round + ", Pick #" + currentPick.PickInRound;
+                pick1team.Text = currentPick.TeamName;
+                pick1playerName.Text = currentPick.PlayerName;
+
+                if (pick2 != null)
+                {
+                    pick2roundandpick.Text = "Round " + pick2.Round + ", Pick #" + pick2.PickInRound;
+                    pick2team.Text = pick2.TeamName;
+                }
+
+                if (pick3 != null)
+                {
+                    pick3roundandpick.Text = "Round " + pick3.Round + ", Pick #" + pick3.PickInRound;
+                    pick3team.Text = pick3.TeamName;
+                }
+
+                if (pick4 != null)
+                {
+                    pick4roundandpick.Text = "Round " + pick4.Round + ", Pick #" + pick4.PickInRound;
+                    pick4team.Text = pick4.TeamName;
+                }
+           
+
+            }
+        }
+
+       
+
+        protected void btnResume_Click(object sender, EventArgs e)
+        {
+            btnResume.Visible = false;
+            Timer.Enabled = true;
+            checkIfUserPick((DraftPick)Session["CurrentPick"]);
+        }
+
+        protected void btnSim_Click(object sender, EventArgs e)
+        {
+            DraftPick currentPick = null;
+            bool isUserPick = false;
+            while (!isUserPick)
+            {
+                currentPick = (DraftPick)Session["CurrentPick"];
+                if (currentPick.IsUserTeam)
+                {
+                    isUserPick = true;
+                }
+                else
+                {
+                    autoPick(currentPick);
+                    advancePick(currentPick);
+                }
+
+            }
+            currentPick = (DraftPick)Session["CurrentPick"];
+            checkIfUserPick(currentPick);
+            currentPick = (DraftPick)Session["CurrentPick"];
+            populateSidebar(currentPick);
 
         }
     }
+
+    
 
     
    

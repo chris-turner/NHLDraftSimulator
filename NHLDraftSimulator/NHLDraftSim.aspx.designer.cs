@@ -22,6 +22,15 @@ namespace NHLDraftSimulator {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// pageheader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pageheader;
+        
+        /// <summary>
         /// teamonclock control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,33 @@ namespace NHLDraftSimulator {
         protected global::System.Web.UI.WebControls.Image TeamLogo;
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// Timer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer Timer;
+        
+        /// <summary>
+        /// timerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl timerLabel;
+        
+        /// <summary>
         /// currentPickSelection control.
         /// </summary>
         /// <remarks>
@@ -56,6 +92,15 @@ namespace NHLDraftSimulator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDraft;
+        
+        /// <summary>
+        /// btnResume control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnResume;
         
         /// <summary>
         /// availablePlayers control.
@@ -191,5 +236,14 @@ namespace NHLDraftSimulator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton viewFullResults;
+        
+        /// <summary>
+        /// simToUserPickbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton simToUserPickbtn;
     }
 }

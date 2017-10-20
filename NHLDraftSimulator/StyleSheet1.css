@@ -24,4 +24,17 @@
     height: 798px;
 }
 
+#timerLabel {
+    font-size: 15px;
+}
+
+.playergrid {
+    
+}
+
+.footer {
+text-align: center;
+    font-size: 12px;
+    vertical-align:bottom;
+}
 

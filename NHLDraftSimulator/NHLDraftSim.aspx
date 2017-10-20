@@ -29,7 +29,7 @@
   <div class="row container-fluid">
 
       <div class="header">
-    <h1>NHL Draft Simulator</h1>
+    <h1 id="pageheader" runat="server">NHL Draft Simulator</h1>
   </div>
       <div class="col-2 col-sm-2 col-lg-2 ">
 
@@ -42,25 +42,30 @@
         <asp:Image ID="TeamLogo" runat="server" ImageUrl="/Images/nhllogo.jpg" />
         <br/>
 
+       <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:Timer ID="Timer" runat="server" OnTick="Timer_Tick" Interval="1000">
+       </asp:Timer>
+        <br/>
+        <label id="timerLabel" runat="server" Visible="False">0:00</label>
+      <br/>
         <br/>
         <asp:Label ID="currentPickSelection" runat="server" Visible="false"></asp:Label>
       <br/>
         <asp:Button ID="btnDraft" runat="server" Text="Draft" OnClick="btnDraft_Click" />
         <br/>
-         <asp:Panel ID="availablePlayers"  runat="server" Height="464px" Visible="false">
-              <asp:GridView ID="PlayerSelectionGridView" runat="server" AutoGenerateColumns="False" HorizontalAlign="Center" ShowHeader="false" GridLines="none" >
+        <asp:Button ID="btnResume" runat="server" Text="Resume" Visible="false" OnClick="btnResume_Click" />
+         <asp:Panel ID="availablePlayers"  runat="server" Height="464px" Visible="false" ScrollBars="Vertical">
+              <asp:GridView class="playergrid" ID="PlayerSelectionGridView" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" ShowHeader="True" GridLines="none"  >
 
             <Columns>
-                    <asp:BoundField DataField="Ranking"  SortExpression="Ranking" />
+                    <asp:BoundField DataField="Ranking"  SortExpression="Ranking" >  <HeaderStyle Width="200px" /> </asp:BoundField>
+
                  </Columns>
                   <Columns>
                 <asp:BoundField DataField="Position"  SortExpression="Position" />
                        </Columns>
-                   <Columns>
-                <asp:BoundField DataField="PlayerFName"  SortExpression="PlayerFName" />
-                       </Columns>
                   <Columns>
-                <asp:BoundField DataField="PlayerLName"  SortExpression="PlayerLName" />
+                <asp:BoundField DataField="Name"  SortExpression="PlayerLName" />
                        </Columns>
                   <Columns>
                 <asp:BoundField DataField="Nationality"  SortExpression="Nationality" />
@@ -78,49 +83,39 @@
            </asp:Panel>
    
    </div>
+
    
     <div class="col-2 col-sm-2 col-lg-2 right">
         
         
-      <asp:Label ID="pick1roundandpick" runat="server" Text="Pick1">
-      </asp:Label><br/>
-      <asp:Label ID="pick1team" runat="server" Text="Pick1">
-      </asp:Label><br/>
-        <asp:Label ID="pick1playerName" runat="server" Text="">
-      </asp:Label><br/>
+      <asp:Label ID="pick1roundandpick" runat="server" Text="Pick1"> </asp:Label><br/>
+      <asp:Label ID="pick1team" runat="server" Text="Pick1"> </asp:Label><br/>
+        <asp:Label ID="pick1playerName" runat="server" Text=""> </asp:Label><br/>
 
       
       <hr/>
       
-      <asp:Label ID="pick2roundandpick" runat="server" Text="Pick2">
-      </asp:Label><br/>
-      <asp:Label ID="pick2team" runat="server" Text="Pick2">
-      </asp:Label><br/>
-        <asp:Label ID="pick2playerName" runat="server" Text="">
-      </asp:Label><br/>
+      <asp:Label ID="pick2roundandpick" runat="server" Text="Pick2"> </asp:Label><br/>
+      <asp:Label ID="pick2team" runat="server" Text="Pick2"> </asp:Label><br/>
+        <asp:Label ID="pick2playerName" runat="server" Text=""> </asp:Label><br/>
       
       <hr/>
       
-      <asp:Label ID="pick3roundandpick" runat="server" Text="Pick3">
-      </asp:Label><br/>
-      <asp:Label ID="pick3team" runat="server" Text="Pick3">
-      </asp:Label><br/>
-         <asp:Label ID="pick3playerName" runat="server" Text="">
-      </asp:Label><br/>
+      <asp:Label ID="pick3roundandpick" runat="server" Text="Pick3"> </asp:Label><br/>
+      <asp:Label ID="pick3team" runat="server" Text="Pick3"> </asp:Label><br/>
+         <asp:Label ID="pick3playerName" runat="server" Text=""> </asp:Label><br/>
 
       
       <hr/>
       
-      <asp:Label ID="pick4roundandpick" runat="server" Text="Pick4">
-      </asp:Label><br/>
-      <asp:Label ID="pick4team" runat="server" Text="Pick4">
-      </asp:Label><br/>
-        <asp:Label ID="pick4playerName" runat="server" Text="">
-      </asp:Label><br/>
+      <asp:Label ID="pick4roundandpick" runat="server" Text="Pick4"> </asp:Label><br/>
+      <asp:Label ID="pick4team" runat="server" Text="Pick4"> </asp:Label><br/>
+        <asp:Label ID="pick4playerName" runat="server" Text=""> </asp:Label><br/>
         <hr/>
         <asp:LinkButton id="viewFullResults" class="btn btn-primary btn-md" runat="server" OnClick="viewFullResults_Click">View Full Draft Results</asp:LinkButton>
         <hr/>
-    
+        <asp:LinkButton id="simToUserPickbtn" class="btn btn-primary btn-md" runat="server" OnClick="btnSim_Click">Sim to User Pick</asp:LinkButton>
+        <hr/>
       
     </div>
   
@@ -129,5 +124,10 @@
 
 	  
       </form>
+      <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Chris Turner 2017 - still a work in progress - <a href="comingsoon.html">coming soon</a> - player info provided by TheDraftAnalyst.com</span>
+      </div>
+    </footer>
 </body>
 </html>

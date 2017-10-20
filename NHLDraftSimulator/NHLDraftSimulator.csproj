@@ -67,12 +67,41 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
+    <Content Include="comingsoon.html" />
+    <Content Include="Images\avalanche.gif" />
+    <Content Include="Images\blackhawks.gif" />
+    <Content Include="Images\blues.gif" />
+    <Content Include="Images\bruins.gif" />
+    <Content Include="Images\canucks.gif" />
+    <Content Include="Images\capitals.gif" />
     <Content Include="Images\CBJ.gif" />
+    <Content Include="Images\coyotes.gif" />
+    <Content Include="Images\devils.gif" />
+    <Content Include="Images\ducks.gif" />
+    <Content Include="Images\flames.gif" />
+    <Content Include="Images\flyers.gif" />
+    <Content Include="Images\habs.gif" />
+    <Content Include="Images\hurricanes.gif" />
+    <Content Include="Images\islanders.gif" />
     <Content Include="Images\Jets.gif" />
+    <Content Include="Images\kings.gif" />
+    <Content Include="Images\knights.gif" />
     <Content Include="Images\Leafs.gif" />
+    <Content Include="Images\lightning.gif" />
     <Content Include="Images\Oilers.gif" />
+    <Content Include="Images\panthers.gif" />
+    <Content Include="Images\penguins.gif" />
+    <Content Include="Images\predators.gif" />
+    <Content Include="Images\rangers.gif" />
+    <Content Include="Images\redwings.gif" />
+    <Content Include="Images\sabres.gif" />
+    <Content Include="Images\senators.gif" />
+    <Content Include="Images\sharks.gif" />
+    <Content Include="Images\stars.gif" />
+    <Content Include="Images\wild.gif" />
     <Content Include="packages.config" />
     <Content Include="SelectYear.aspx" />
+    <Content Include="DraftResults.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -121,6 +150,13 @@
     </Compile>
     <Compile Include="TeamSelector.aspx.designer.cs">
       <DependentUpon>TeamSelector.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DraftResults.aspx.cs">
+      <DependentUpon>DraftResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DraftResults.aspx.designer.cs">
+      <DependentUpon>DraftResults.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

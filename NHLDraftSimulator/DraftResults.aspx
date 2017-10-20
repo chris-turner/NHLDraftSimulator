@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeamSelector.aspx.cs" Inherits="NHLDraftSimulator.TeamSelector" EnableEventValidation="false" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DraftResults.aspx.cs" Inherits="NHLDraftSimulator.WebForm2" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -21,44 +20,38 @@
   <body>
     
       <form id="form1" runat="server">
-    
-  <div class="header">
-    <h1>NHL Draft Simulator</h1>
+	  
+  <div class="row container-fluid">
+
+      <div class="header">
+    <h1 id="pageheader" runat="server">NHL Draft Simulator</h1>
   </div>
-  
- 
-                <div class="row">
-                     <div class="col-2 col-sm-2 col-lg-2 ">
+      <div class="col-2 col-sm-2 col-lg-2 ">
 
       </div>
-    <div class="col-8 col-sm-8 col-lg-8 main maincontainer">
-        Choose your team
-      <br/>
 
-        <asp:ListView ID="TeamListView" runat="server" HorizontalAlign="center" >
+   <div class="col-8 col-sm-8 col-lg-8 maincontainer" >
+           <asp:Panel ID="draftResults"  runat="server" Height="900px" Visible="false" ScrollBars="Auto">
+              <asp:GridView  ID="draftResultsGridView" runat="server" AutoGenerateColumns="true" HorizontalAlign="Center" ShowHeader="true" GridLines="none" Height="229px" Width="719px"  >
 
-            <ItemTemplate >
-                        <asp:ImageButton ID="teamImage" runat="server" ImageUrl= '<%# "Images\\"+Eval("ImageFileName")+".gif" %>' 
-                            OnClick="teamImage_onclick" CommandArgument='<%# Eval("TeamID") %>' height="75px" Width="100px" />
-                
-                      </ItemTemplate>
+        </asp:GridView>
+           </asp:Panel>
+       </div>
 
-        </asp:ListView>
-    </div>
+        <div class="col-2 col-sm-2 col-lg-2 right">
+            <br />
+             <br />
+             <br />
+             <br />
+            </div>
 
-
-    <div class="col-2 col-sm-2 col-lg-2 right">
-      
-    </div>
-    
-
-</div>  
+      </div>
+        
       </form>
-      <footer class="footer">
+ <!--  <footer class="footer">
       <div class="container">
         <span class="text-muted">Chris Turner 2017 - still a work in progress - <a href="comingsoon.html">coming soon</a> - player info provided by TheDraftAnalyst.com</span>
       </div>
-    </footer>
+    </footer> -->
 </body>
 </html>
-

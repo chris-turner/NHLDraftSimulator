@@ -29,7 +29,7 @@ namespace NHLDraftSimulator
                             TeamID = rdr.GetInt32(0),
                             TeamName = rdr.GetString(1),
                             ImageFileName = rdr.GetString(2),
-                            DraftPickID = rdr.GetGuid(3),
+                            DraftPickID = rdr.GetInt32(3),
                             OverallPickNumber = rdr.GetInt32(4),
                             Round = rdr.GetInt32(5),
                             PickInRound = rdr.GetInt32(6)

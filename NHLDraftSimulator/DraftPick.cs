@@ -23,7 +23,7 @@ namespace NHLDraftSimulator
 
         public string ImageFileName { get; set; }
 
-        public Guid DraftPickID { get; set; }
+        public int DraftPickID { get; set; }
 
         public bool IsUserTeam { get; set; }
 
