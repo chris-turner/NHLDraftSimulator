@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>NHL Draft Simulator</title>
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet"/>
-    <link href="bootstrap/css/bootstrap.min" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="StyleSheet1.css" rel="stylesheet"/>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="jscode.js"></script>
     
 
