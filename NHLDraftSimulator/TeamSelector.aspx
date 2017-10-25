@@ -54,11 +54,11 @@
 
 </div>  
       </form>
-      <footer class="footer">
+     <%-- <footer class="footer">
       <div class="container">
         <span class="text-muted">Chris Turner 2017 - still a work in progress - <a href="comingsoon.html">coming soon</a> - player info provided by TheDraftAnalyst.com</span>
       </div>
-    </footer>
+    </footer>--%>
 </body>
 </html>
 

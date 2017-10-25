@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="Home.aspx" />
     <Content Include="comingsoon.html" />
+    <Content Include="Error.html" />
     <Content Include="Images\avalanche.gif" />
     <Content Include="Images\blackhawks.gif" />
     <Content Include="Images\blues.gif" />
@@ -115,7 +116,9 @@
     <Content Include="NHLDraftSim.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="TeamSelector.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Draft.cs" />
