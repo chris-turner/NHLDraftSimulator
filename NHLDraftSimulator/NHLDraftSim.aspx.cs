@@ -65,43 +65,46 @@ namespace NHLDraftSimulator
 
         public void autoPick(DraftPick currentPick)
         {
-            int playerID = 0;
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
-            con.Open();
-            //eventually write a more complex algorithm that takes Team needs / tendencies/ etc. into account. 
-            SqlCommand cmd = new SqlCommand("select top 1 PlayerID, P.Ranking" +
-                " from Player as P where P.DraftYear = (select Draft.DraftYear from Draft where Draft.DraftID = '" + Session["DraftID"].ToString().Trim() + "' ) and P.PlayerID not in" +
-                "(Select PlayerTakenID from Player_Draft_Pick where DraftID = '" + Session["DraftID"].ToString().Trim() + "') order by P.Ranking", con);
-            using (var rdr = cmd.ExecuteReader())
+            if (currentPick.PlayerName == null)
             {
-                while (rdr.Read())
-                {
-                    playerID = rdr.GetInt32(0);
-                }
-            }
-            con.Close();
-            if (playerID != 0)
-            {
+                int playerID = 0;
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["NHLDraftDB"].ToString());
                 con.Open();
-                cmd = new SqlCommand("insert into Player_Draft_Pick (PlayerTakenID, DraftID, DraftPickID) values (" + playerID + ",'" + Session["DraftID"] + "','" + currentPick.DraftPickID + "')", con);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                Player[] players = (Player[])Session["players"];
-                string pickName = "";
-                foreach (Player player in players)
+                //eventually write a more complex algorithm that takes Team needs / tendencies/ etc. into account. 
+                SqlCommand cmd = new SqlCommand("select top 1 PlayerID, P.Ranking" +
+                    " from Player as P where P.DraftYear = (select Draft.DraftYear from Draft where Draft.DraftID = '" + Session["DraftID"].ToString().Trim() + "' ) and P.PlayerID not in" +
+                    "(Select PlayerTakenID from Player_Draft_Pick where DraftID = '" + Session["DraftID"].ToString().Trim() + "') order by P.Ranking", con);
+                using (var rdr = cmd.ExecuteReader())
                 {
-                    if (player.PlayerID == playerID)
+                    while (rdr.Read())
                     {
-                        pickName = player.PlayerFName + " " + player.PlayerLName;
+                        playerID = rdr.GetInt32(0);
                     }
                 }
-                btnDraft.Visible = false;
-                currentPickSelection.Visible = true;
-                currentPickSelection.Text = currentPick.TeamName + " select " + pickName;
-                currentPick.PlayerID = playerID;
-                currentPick.PlayerName = pickName;
-                Session["CurrentPick"] = currentPick;
+                con.Close();
+                if (playerID != 0)
+                {
+                    con.Open();
+                    cmd = new SqlCommand("insert into Player_Draft_Pick (PlayerTakenID, DraftID, DraftPickID) values (" + playerID + ",'" + Session["DraftID"] + "','" + currentPick.DraftPickID + "')", con);
+
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Player[] players = (Player[])Session["players"];
+                    string pickName = "";
+                    foreach (Player player in players)
+                    {
+                        if (player.PlayerID == playerID)
+                        {
+                            pickName = player.PlayerFName + " " + player.PlayerLName;
+                        }
+                    }
+                    btnDraft.Visible = false;
+                    currentPickSelection.Visible = true;
+                    currentPickSelection.Text = currentPick.TeamName + " select " + pickName;
+                    currentPick.PlayerID = playerID;
+                    currentPick.PlayerName = pickName;
+                    Session["CurrentPick"] = currentPick;
+                }
             }
 
         }
@@ -333,12 +336,14 @@ namespace NHLDraftSimulator
 
         protected void btnSim_Click(object sender, EventArgs e)
         {
+            
             DraftPick currentPick = null;
             bool isUserPick = false;
             while (!isUserPick)
             {
                 currentPick = (DraftPick)Session["CurrentPick"];
-                if (currentPick.IsUserTeam)
+                
+                if (currentPick.IsUserTeam && currentPick.PlayerName == null)
                 {
                     isUserPick = true;
                 }
