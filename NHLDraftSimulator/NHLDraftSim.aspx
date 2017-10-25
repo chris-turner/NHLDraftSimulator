@@ -116,6 +116,8 @@
         <hr/>
         <asp:LinkButton id="simToUserPickbtn" class="btn btn-primary btn-md" runat="server" OnClick="btnSim_Click">Sim to User Pick</asp:LinkButton>
         <hr/>
+        <asp:LinkButton id="homeBtn" class="btn btn-primary btn-md" runat="server" OnClick="home_Click">Home</asp:LinkButton>
+        <hr/>
       
     </div>
   

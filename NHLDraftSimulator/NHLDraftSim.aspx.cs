@@ -223,6 +223,7 @@ namespace NHLDraftSimulator
             Timer.Enabled = false;
             btnDraft.Visible = false;
             btnResume.Visible = true;
+            availablePlayers.Visible = false;
             Response.Write("<script>");
             Response.Write("window.open('DraftResults.aspx','_blank')");
             Response.Write("</script>");
@@ -286,6 +287,10 @@ namespace NHLDraftSimulator
                     pick3roundandpick.Text = "";
                     pick3team.Text = "";
                     pick3playerName.Text = "";
+
+                    pick4roundandpick.Text = "";
+                    pick4team.Text = "";
+                    pick4playerName.Text = "";
                 }
 
             }
@@ -294,7 +299,15 @@ namespace NHLDraftSimulator
                 pick2roundandpick.Text = "";
                 pick2team.Text = "";
                 pick2playerName.Text = "";
-           }
+
+                pick3roundandpick.Text = "";
+                pick3team.Text = "";
+                pick3playerName.Text = "";
+
+                pick4roundandpick.Text = "";
+                pick4team.Text = "";
+                pick4playerName.Text = "";
+            }
 
 
             if (currentPick != null)
@@ -341,24 +354,45 @@ namespace NHLDraftSimulator
             bool isUserPick = false;
             while (!isUserPick)
             {
+               
                 currentPick = (DraftPick)Session["CurrentPick"];
-                
-                if (currentPick.IsUserTeam && currentPick.PlayerName == null)
+                if (currentPick != null)
                 {
-                    isUserPick = true;
+                    if (currentPick.IsUserTeam && currentPick.PlayerName == null)
+                    {
+                        isUserPick = true;
+                    }
+                    else
+                    {
+                        autoPick(currentPick);
+                        if (currentPick.NextPick != null)
+                        {
+                            advancePick(currentPick);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
                 }
                 else
                 {
-                    autoPick(currentPick);
-                    advancePick(currentPick);
+                    break;
                 }
+
 
             }
             currentPick = (DraftPick)Session["CurrentPick"];
+
             checkIfUserPick(currentPick);
             currentPick = (DraftPick)Session["CurrentPick"];
             populateSidebar(currentPick);
 
+        }
+
+        protected void home_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Home.aspx");
         }
     }
 
