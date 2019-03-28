@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -112,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\nhllogo.jpg" />
-    <Content Include="jscode.js" />
     <Content Include="NHLDraftSim.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="TeamSelector.aspx" />

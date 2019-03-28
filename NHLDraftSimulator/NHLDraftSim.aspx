@@ -43,11 +43,14 @@
           </div>
           </div>
   </div>
-         
+          <div class="row dividerRow">
+              <div class="col-2 col-sm-2 col-lg-2 left"></div>
+              <div class="col-8 col-sm-8 col-lg-8 centerDiv">
+                  <hr />
+              </div>
+              </div>
         
-  <%--    <div class="col-2 col-sm-2 col-lg-2 ">
 
-      </div>--%>
       <asp:UpdatePanel ID="udpDraft" runat="server">
       <ContentTemplate>
           <div class="row">

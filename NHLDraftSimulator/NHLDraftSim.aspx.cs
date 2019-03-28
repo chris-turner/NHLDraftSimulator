@@ -34,7 +34,7 @@ namespace NHLDraftSimulator
 
         public void checkIfUserPick(DraftPick currentPick)
         {
-            if (!currentPick.IsUserTeam)
+            if (!currentPick.IsUserTeam || currentPick.PlayerName != null)
             {
                 btnDraft.Visible = false;
                 Timer.Interval = 2000;
@@ -227,6 +227,7 @@ namespace NHLDraftSimulator
             Response.Write("<script>");
             Response.Write("window.open('DraftResults.aspx','_blank')");
             Response.Write("</script>");
+
 
         }
 
