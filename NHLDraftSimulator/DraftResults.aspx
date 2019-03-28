@@ -22,7 +22,7 @@
 	  
   <div class="row container-fluid">
 
-      <div class="header">
+      <div class="centerDiv">
     <h1 id="pageheader" runat="server">NHL Draft Simulator</h1>
   </div>
       <div class="col-2 col-sm-2 col-lg-2 ">

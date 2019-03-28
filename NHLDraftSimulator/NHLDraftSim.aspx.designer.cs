@@ -31,6 +31,42 @@ namespace NHLDraftSimulator {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pageheader;
         
         /// <summary>
+        /// viewFullResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton viewFullResults;
+        
+        /// <summary>
+        /// simToUserPickbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton simToUserPickbtn;
+        
+        /// <summary>
+        /// homeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton homeBtn;
+        
+        /// <summary>
+        /// udpDraft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpDraft;
+        
+        /// <summary>
         /// teamonclock control.
         /// </summary>
         /// <remarks>
@@ -227,32 +263,5 @@ namespace NHLDraftSimulator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label pick4playerName;
-        
-        /// <summary>
-        /// viewFullResults control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton viewFullResults;
-        
-        /// <summary>
-        /// simToUserPickbtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton simToUserPickbtn;
-        
-        /// <summary>
-        /// homeBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton homeBtn;
     }
 }

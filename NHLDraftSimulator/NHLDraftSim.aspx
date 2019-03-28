@@ -24,18 +24,35 @@
 	  
 	  
 	  
+           
   
-  
-  <div class="row container-fluid">
-
-      <div class="header">
+  <div class="row container-fluid centerDiv">
+      <div class="row">
+      <div class="col-12">
+      
     <h1 id="pageheader" runat="server">NHL Draft Simulator</h1>
+          </div>
+          </div>
+      <div class="row">
+      <div class="col-12">
+          <asp:LinkButton id="viewFullResults" class="btn btn-default btn-sm" runat="server" OnClick="viewFullResults_Click">View Full Draft Results</asp:LinkButton>
+        
+        <asp:LinkButton id="simToUserPickbtn" class="btn btn-default btn-sm" runat="server" OnClick="btnSim_Click">Sim to User Pick</asp:LinkButton>
+        
+        <asp:LinkButton id="homeBtn" class="btn btn-default btn-sm" runat="server" OnClick="home_Click">Home</asp:LinkButton>
+          </div>
+          </div>
   </div>
-      <div class="col-2 col-sm-2 col-lg-2 ">
+         
+        
+  <%--    <div class="col-2 col-sm-2 col-lg-2 ">
 
-      </div>
-
-   <div class="col-8 col-sm-8 col-lg-8 maincontainer" >
+      </div>--%>
+      <asp:UpdatePanel ID="udpDraft" runat="server">
+      <ContentTemplate>
+          <div class="row">
+              <div class="col-2 col-sm-2 col-lg-2 left"></div>
+   <div class="col-8 col-sm-8 col-lg-8 maincontainer centerDiv" >
        
      <asp:Label ID="teamonclock" runat="server" Text="">TeamName are on the clock.</asp:Label>
       <br/>
@@ -73,7 +90,7 @@
                   <Columns>
                 <asp:TemplateField >
                 <ItemTemplate >
-                        <asp:LinkButton id="choosePlayer" class="btn btn-primary btn-lg" runat="server" OnClick="choosePlayer_Click" CommandArgument= '<%# Eval("PlayerID") %>'>Select</asp:LinkButton>
+                        <asp:LinkButton id="choosePlayer" class="btn btn-default btn-lg" runat="server" OnClick="choosePlayer_Click" CommandArgument= '<%# Eval("PlayerID") %>'>Select</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                </Columns>
@@ -111,24 +128,20 @@
       <asp:Label ID="pick4roundandpick" runat="server" Text="Pick4"> </asp:Label><br/>
       <asp:Label ID="pick4team" runat="server" Text="Pick4"> </asp:Label><br/>
         <asp:Label ID="pick4playerName" runat="server" Text=""> </asp:Label><br/>
-        <hr/>
-        <asp:LinkButton id="viewFullResults" class="btn btn-primary btn-md" runat="server" OnClick="viewFullResults_Click">View Full Draft Results</asp:LinkButton>
-        <hr/>
-        <asp:LinkButton id="simToUserPickbtn" class="btn btn-primary btn-md" runat="server" OnClick="btnSim_Click">Sim to User Pick</asp:LinkButton>
-        <hr/>
-        <asp:LinkButton id="homeBtn" class="btn btn-primary btn-md" runat="server" OnClick="home_Click">Home</asp:LinkButton>
-        <hr/>
+      
+       
       
     </div>
   
-  
   </div>
-
-	  
+  </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+           
       </form>
       <footer class="footer">
       <div class="container">
-        <span class="text-muted">Chris Turner 2017 - still a work in progress - <a href="comingsoon.html">coming soon</a> - player info provided by TheDraftAnalyst.com</span>
+        <span class="text-muted">Chris Turner 2017 - player info provided by TheDraftAnalyst.com</span>
       </div>
     </footer>
 </body>

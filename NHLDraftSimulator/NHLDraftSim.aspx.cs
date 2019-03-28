@@ -42,7 +42,7 @@ namespace NHLDraftSimulator
             }
             else
             {
-                Timer.Interval = 60000;
+                Timer.Interval = 600000;
                 btnDraft.Visible = true;
             }
 
@@ -241,8 +241,15 @@ namespace NHLDraftSimulator
                 populateSidebar(currentPick);
                 if (currentPick.PlayerName == null)
                 {
-                    autoPick(currentPick);
-                    Timer.Interval = 4500;
+                    if (currentPick.IsUserTeam && Timer.Interval == 2000)
+                    {
+                        Timer.Interval = 600000;
+                    }
+                    else
+                    {
+                        autoPick(currentPick);
+                        Timer.Interval = 4500;
+                    }
 
                 }
                 else

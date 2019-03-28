@@ -22,7 +22,7 @@
     
       <form id="form1" runat="server">
     
-  <div class="header">
+  <div class="centerDiv">
     <h1>NHL Draft Simulator</h1>
   </div>
            <div class="row">
